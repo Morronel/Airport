@@ -46,4 +46,23 @@ public class AirportPanel {
             }
         } while (!argument.equals("x"));
     }
+
+    public List getPlanes(){
+        return planeList;
+    }
+
+    public List getFlights(){
+        return flightList;
+    }
+
+    public Plane getPlaneById(String id){
+        Plane ret = new Plane();
+        for (Plane certainPlane : planeList){
+            if (certainPlane.getId().equals(id)){
+                ret = certainPlane;
+            }
+        }
+        return ret;
+    }
+
 }

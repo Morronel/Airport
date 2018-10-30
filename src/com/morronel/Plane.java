@@ -9,6 +9,10 @@ public class Plane {
         this.capacity = thisCapatity;
     }
 
+    public Plane(){
+
+    }
+
     public String getId() {
         return id;
     }
