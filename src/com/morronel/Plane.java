@@ -4,8 +4,9 @@ public class Plane {
     private String id;
     private int capacity;
 
-    public Plane(){
-
+    public Plane(String thisId, int thisCapatity){
+        this.id = thisId;
+        this.capacity = thisCapatity;
     }
 
     public String getId() {

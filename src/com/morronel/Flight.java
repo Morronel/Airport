@@ -5,8 +5,10 @@ public class Flight {
     private String departureCode;
     private String destinationCode;
 
-    public Flight(){
-
+    public Flight(String thisPlaneId, String thisDepCode, String thisDestCode){
+        this.planeId = thisPlaneId;
+        this.departureCode = thisDepCode;
+        this.destinationCode = thisDestCode;
     }
 
     public String getPlaneId() {
