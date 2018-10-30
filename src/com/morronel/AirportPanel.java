@@ -26,7 +26,7 @@ public class AirportPanel {
             if (argument.equals("x")){
                 break;
             }
-            if (argument.equals("1")){
+            else if (argument.equals("1")){
                 System.out.println("Give plane ID: ");
                 String id = scanner.nextLine();
                 System.out.println("Give plane capacity: ");
@@ -34,7 +34,7 @@ public class AirportPanel {
                 Plane plane = new Plane(id, capacity);
                 planeList.add(plane);
             }
-            if (argument.equals("2")){
+            else if (argument.equals("2")){
                 System.out.println("Give plane ID: ");
                 String id = scanner.nextLine();
                 System.out.println("Give departure airport code: ");
@@ -54,15 +54,4 @@ public class AirportPanel {
     public List getFlights(){
         return flightList;
     }
-
-    public Plane getPlaneById(String id){
-        Plane ret = new Plane();
-        for (Plane certainPlane : planeList){
-            if (certainPlane.getId().equals(id)){
-                ret = certainPlane;
-            }
-        }
-        return ret;
-    }
-
 }
