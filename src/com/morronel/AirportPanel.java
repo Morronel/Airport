@@ -8,31 +8,28 @@ public class AirportPanel {
     private List<Flight> flightList = new ArrayList<>();
     private List<Plane> planeList = new ArrayList<>();
 
-    public AirportPanel(){
-
+    public void printInitialMessage(){
+        System.out.println("Airport panel");
+        System.out.println("--------------------");
+        System.out.println();
     }
 
-    public void initialMessage(){
-        System.out.println("Airport panel\n--------------------\n");
+    public String askForInput(){
+        System.out.println("Choose operation:\n" + "[1] Add airplane\n" + "[2] Add flight\n" + "[x] Exit");
+        return (new Scanner(System.in)).nextLine();
     }
 
     public void mainPanelLoop(){
         String argument;
+        Scanner scanner = new Scanner(System.in);
 
-        do {
-            System.out.println("Choose operation:\n" + "[1] Add airplane\n" + "[2] Add flight\n" + "[x] Exit");
-            Scanner scanner = new Scanner(System.in);
-            argument = scanner.nextLine();
-            if (argument.equals("x")){
-                break;
-            }
-            else if (argument.equals("1")){
+        while (!(argument = askForInput()).equalsIgnoreCase("x")){
+            if (argument.equals("1")){
                 System.out.println("Give plane ID: ");
                 String id = scanner.nextLine();
                 System.out.println("Give plane capacity: ");
                 int capacity = Integer.parseInt(scanner.nextLine());
-                Plane plane = new Plane(id, capacity);
-                planeList.add(plane);
+                planeList.add(new Plane(id, capacity));
             }
             else if (argument.equals("2")){
                 System.out.println("Give plane ID: ");
@@ -41,17 +38,16 @@ public class AirportPanel {
                 String depCode = scanner.nextLine();
                 System.out.println("Give destination airport code: ");
                 String destCode = scanner.nextLine();
-                Flight flight = new Flight(id, depCode, destCode);
-                flightList.add(flight);
+                flightList.add(new Flight(id, depCode, destCode));
             }
-        } while (!argument.equals("x"));
+        }
     }
 
-    public List getPlanes(){
+    public List<Plane> getPlanes(){
         return planeList;
     }
 
-    public List getFlights(){
+    public List<Flight> getFlights(){
         return flightList;
     }
 }
