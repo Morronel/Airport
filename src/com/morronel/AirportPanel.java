@@ -1,53 +1,61 @@
 package com.morronel;
 
+import com.morronel.utils.ConsoleUtils;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 public class AirportPanel {
-    private List<Flight> flightList = new ArrayList<>();
-    private List<Plane> planeList = new ArrayList<>();
 
-    public void printInitialMessage(){
+    private AirportPanelListener listener;
+
+    public AirportPanel(AirportPanelListener listener) {
+        this.listener = listener;
+    }
+
+    public void launch() {
+
+        List<Plane> planes = new ArrayList<>();
+        List<Flight> flights = new ArrayList<>();
+
+        List<String> inputHintMessages = Arrays.asList(
+                "Choose operation:",
+                "[1] Add airplane",
+                "[2] Add flight",
+                "[x] Exit");
+
+        String input;
+
+        while (!(input = ConsoleUtils.readInputLine(inputHintMessages)).equalsIgnoreCase("x")) {
+            switch (input) {
+                //Blocks so that the variables don't share the same scope
+                case "1": {
+                    String planeId = ConsoleUtils.readInputLine("Give plane ID: ");
+                    int capacity = ConsoleUtils.readInputLineInteger("Give plane capacity: ");
+                    planes.add(new Plane(planeId, capacity));
+                    break;
+                }
+                case "2": {
+                    String planeId = ConsoleUtils.readInputLine("Give plane ID: ");
+                    String departureCode = ConsoleUtils.readInputLine("Give departure airport code: ");
+                    String destinationCode = ConsoleUtils.readInputLine("Give destination airport code: ");
+                    flights.add(new Flight(planeId, departureCode, destinationCode));
+                    break;
+                }
+            }
+        }
+
+        listener.onInputFinished(planes, flights);
+    }
+
+    public void displayInitialMessage() {
         System.out.println("Airport panel");
         System.out.println("--------------------");
         System.out.println();
     }
 
-    public String askForInput(){
-        System.out.println("Choose operation:\n" + "[1] Add airplane\n" + "[2] Add flight\n" + "[x] Exit");
-        return (new Scanner(System.in)).nextLine();
-    }
-
-    public void mainPanelLoop(){
-        String argument;
-        Scanner scanner = new Scanner(System.in);
-
-        while (!(argument = askForInput()).equalsIgnoreCase("x")){
-            if (argument.equals("1")){
-                System.out.println("Give plane ID: ");
-                String id = scanner.nextLine();
-                System.out.println("Give plane capacity: ");
-                int capacity = Integer.parseInt(scanner.nextLine());
-                planeList.add(new Plane(id, capacity));
-            }
-            else if (argument.equals("2")){
-                System.out.println("Give plane ID: ");
-                String id = scanner.nextLine();
-                System.out.println("Give departure airport code: ");
-                String depCode = scanner.nextLine();
-                System.out.println("Give destination airport code: ");
-                String destCode = scanner.nextLine();
-                flightList.add(new Flight(id, depCode, destCode));
-            }
-        }
-    }
-
-    public List<Plane> getPlanes(){
-        return planeList;
-    }
-
-    public List<Flight> getFlights(){
-        return flightList;
+    interface AirportPanelListener {
+        void onInputFinished(List<Plane> planes, List<Flight> flights);
     }
 }
