@@ -1,6 +1,7 @@
 package com.morronel;
 
 public class Flight {
+
     private String planeId;
     private String departureCode;
     private String destinationCode;
@@ -21,5 +22,10 @@ public class Flight {
 
     public String getDestinationCode() {
         return destinationCode;
+    }
+
+    @Override
+    public String toString() {
+        return "(" + departureCode + "-" + destinationCode + ")";
     }
 }

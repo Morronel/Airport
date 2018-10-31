@@ -1,16 +1,13 @@
 package com.morronel;
 
 public class Plane {
+
     private String id;
     private int capacity;
 
-    public Plane(){
-
-    }
-
-    public Plane(String thisId, int thisCapatity){
-        this.id = thisId;
-        this.capacity = thisCapatity;
+    public Plane(String id, int capacity){
+        this.id = id;
+        this.capacity = capacity;
     }
 
     public String getId() {
@@ -19,5 +16,10 @@ public class Plane {
 
     public int getCapacity() {
         return capacity;
+    }
+
+    @Override
+    public String toString() {
+        return id + " (" + capacity + " ppl)";
     }
 }
