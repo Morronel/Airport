@@ -5,26 +5,27 @@ import java.util.Scanner;
 
 public class FlightService {
 
-    List<Plane> pList;
-    List<Flight> fList;
+    private List<Plane> planes;
+    private List<Flight> flights;
 
-    public FlightService(List<Plane> thisPlist, List<Flight> thisFlist){
-        this.pList = thisPlist;
-        this.fList = thisFlist;
+    public FlightService(List<Plane> planes, List<Flight> flights){
+        this.planes = planes;
+        this.flights = flights;
     }
 
-    public void initialMessage(){
-        System.out.println("Flight service\n" + "------------\n");
+    public void printInitialMessage(){
+        System.out.println("Flight service");
+        System.out.println();
+        System.out.println("------------");
     }
 
     private Plane getPlaneById(String id){
-        Plane plane = new Plane();
-        for (Plane randomPlane : pList){
+        for (Plane randomPlane : planes){
             if (randomPlane.getId().equals(id)){
-                plane = randomPlane;
+                return randomPlane;
             }
         }
-        return plane;
+        return new Plane();
     }
 
     public void mainServiceLoop(){
@@ -38,12 +39,12 @@ public class FlightService {
                 break;
             }
             else if (argument.equals("1")){
-                for (Plane plane : pList){
+                for (Plane plane : planes){
                     System.out.println(plane.getId() + " (" + plane.getCapacity() + " ppl)");
                 }
             }
             else if (argument.equals("2")){
-                for (Flight flight : fList){
+                for (Flight flight : flights){
                     Plane plane = getPlaneById(flight.getPlaneId());
                     System.out.println(plane.getId() + " (" + plane.getCapacity() + " ppl) (" + flight.getDepartureCode() + "-" + flight.getDestinationCode() + ")");
                 }
