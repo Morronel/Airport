@@ -16,14 +16,6 @@ public class Flight {
         return planeId;
     }
 
-    public String getDepartureCode() {
-        return departureCode;
-    }
-
-    public String getDestinationCode() {
-        return destinationCode;
-    }
-
     @Override
     public String toString() {
         return "(" + departureCode + "-" + destinationCode + ")";

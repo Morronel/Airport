@@ -14,10 +14,6 @@ public class Plane {
         return id;
     }
 
-    public int getCapacity() {
-        return capacity;
-    }
-
     @Override
     public String toString() {
         return id + " (" + capacity + " ppl)";
